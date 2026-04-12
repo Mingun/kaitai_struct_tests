@@ -25,8 +25,7 @@ class NimSG(spec: TestSpec, provider: ClassTypeProvider) extends BaseGenerator(s
   override def footer(): Unit = { }
   override def nullAssert(actual: expr, actType: DataType): Unit = {
     val actStr = translateAct(actual)
-    val td = new TypeDetector(provider)
-    val expStr = td.detectType(actual) match {
+    val expStr = actType match {
       case Int1Type(false) => "0'u8"
       case IntMultiType(false, Width2, _) => "0'u16"
       case IntMultiType(false, Width4, _) => "0'u32"
